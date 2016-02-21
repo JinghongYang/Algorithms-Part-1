@@ -24,8 +24,8 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class FastCollinearPoints {
 
-	private Point[] points;
-	private LineSegment[] segments;
+	private final Point[] points;
+	private final LineSegment[] segments;
 	private int numSeg = 0;
 
 	public FastCollinearPoints(Point[] points) {
@@ -36,20 +36,14 @@ public class FastCollinearPoints {
 		}
 		this.points = points;
 		checkDuplicatedEntries(points);
-	}
 
-	public int numberOfSegments() {
-		return numSeg;
-	}
-
-	public LineSegment[] segments() {
 
 		ArrayList<LineSegment> segList = new ArrayList<>();
 		int count = 0;
-
+		Point[] pointsCopy = Arrays.copyOf(points, points.length);
+		Arrays.sort(pointsCopy);
 		for (int p = 0; p < points.length; p++) {
-			Point[] pointsp = Arrays.copyOf(points, points.length);
-			Arrays.sort(pointsp);
+			Point[] pointsp = Arrays.copyOf(pointsCopy, pointsCopy.length);
 			Arrays.sort(pointsp, points[p].slopeOrder());
 			for (int q = 1; q < pointsp.length - 1; q++) {
 				if (pointsp[0].slopeTo(pointsp[q]) == pointsp[0].slopeTo(pointsp[q+1])) {
@@ -70,8 +64,14 @@ public class FastCollinearPoints {
 			else count = 0;
 		}
 		segments = segList.toArray(new LineSegment[segList.size()]);
-		return segments;
+	}
 
+	public int numberOfSegments() {
+		return numSeg;
+	}
+
+	public LineSegment[] segments() {
+		return Arrays.copyOf(segments, numberOfSegments());
 	}
 
 	private void checkDuplicatedEntries(Point[] points) {
@@ -88,7 +88,7 @@ public class FastCollinearPoints {
 	public static void main(String[] args) {
 
 		// read the N points from a file
-		In in = new In("C:/Users/cambridge/nannan/Java/collinear/input48.txt");
+		In in = new In(input48.txt);
 		int N = in.readInt();
 		Point[] points = new Point[N];
 		for (int i = 0; i < N; i++) {
