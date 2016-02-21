@@ -17,16 +17,13 @@ package Pattern_Recognition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 
 public class BruteCollinearPoints {
 
-	private Point[] points;
-	private LineSegment[] segments;
+	private final Point[] points;
+	private final LineSegment[] segments;
 	private int numSeg = 0;
 
 	public BruteCollinearPoints(Point[] points) {
@@ -37,14 +34,7 @@ public class BruteCollinearPoints {
 		}
 		this.points = points;
 		checkDuplicatedEntries(points);
-	}
-
-	public int numberOfSegments() {
-		return numSeg;
-	}
-
-	public LineSegment[] segments() {
-
+		
 		ArrayList<LineSegment> segList = new ArrayList<>();
 		Point[] pointsCopy = Arrays.copyOf(points, points.length);
 		Arrays.sort(pointsCopy);
@@ -62,8 +52,14 @@ public class BruteCollinearPoints {
 			}
 		}
 		segments = segList.toArray(new LineSegment[segList.size()]);
-		return segments;
+	}
 
+	public int numberOfSegments() {
+		return numSeg;
+	}
+
+	public LineSegment[] segments() {
+		return Arrays.copyOf(segments, numberOfSegments());
 	}
 
 	private void checkDuplicatedEntries(Point[] points) {
@@ -86,25 +82,16 @@ public class BruteCollinearPoints {
 		for (int i = 0; i < N; i++) {
 			points[i] = new Point(x[i], y[i]);
 		}
-		// draw the points
-		StdDraw.show(0);
-		StdDraw.setXscale(0, 32768);
-		StdDraw.setYscale(0, 32768);
-		for (Point p : points) {
-			p.draw();
-		}
-		StdDraw.show();
+		
 		// print and draw the line segments
 		FastCollinearPoints collinear = new FastCollinearPoints(points);
-		for (LineSegment segment : collinear.segments()) {
-			StdOut.println(segment);
-			segment.draw();
-		}
-
+		int n = collinear.numberOfSegments();
+		StdOut.println(n);
 	}
 
 
 
 
 }
+
 
