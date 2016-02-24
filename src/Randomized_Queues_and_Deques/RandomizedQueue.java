@@ -1,3 +1,12 @@
+/***********************************************
+ * A randomized queue is similar to a stack or queue, 
+ * except that the item removed is chosen uniformly 
+ * at random from items in the data structure.
+ * 
+ * @author Jinghong Yang
+ * 
+ * ***********************************************************
+
 package Randomized_Queues_and_Deques;
 import java.util.Iterator;
 
@@ -86,15 +95,5 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	public static void main(String[] args) {
 		// unit testing
 	}
-
-
-
-
-
-
-
-
-
-
 
 }
