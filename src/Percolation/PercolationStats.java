@@ -1,5 +1,22 @@
-package Percolation;
+/****************************************************************
+ * Run Monte Carlo simulation to estimate the percolation threshold, consider the following 
+ * computational experiment:
+ * 
+ * 1. Initialize all sites to be blocked.
+ * 2. Repeat the following until the system percolates:
+ *  - Choose a site (row i, column j) uniformly at random among all blocked sites.
+ *  - Open the site (row i, column j).
+ * 
+ * The fraction of sites that are opened when the system percolates provides an estimate 
+ * of the percolation threshold. For example, if sites are opened in a 20-by-20 lattice 
+ * according to the snapshots below, then our estimate of the percolation threshold is 
+ * 204/400 = 0.51 because the system percolates when the 204th site is opened.
+ * 
+ * @author Jinghong Yang
+ * 
+ * **********************************************************
 
+package Percolation;
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
